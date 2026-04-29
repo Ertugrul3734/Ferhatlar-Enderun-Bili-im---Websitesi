@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferhatlar Enderun Bilişim | Teknoloji ve Gelecek</title>
+    <link rel="website icon" href="assets/images/logo.png" type="png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* SENİN PALETİN (AĞIRLIKLI) */
+            --color1: #b6c8ff; 
+            --color2: #f8ecff; 
+            --color3: #171934; 
+            --color4: #77767c; 
+            --color5: #e2e2e2;
+            /* EKLEDİĞİM MODERN VURGULAR */
+            --accent-gold: #ffd700;
+            --neon-cyan: #00f2ff;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #ffffff;
+            color: var(--color3);
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6, .navbar-brand { font-family: 'Outfit', sans-serif; }
+
+       .club-section {
+        background: #0d0f20;
+        padding: 100px 0;
+        color: white;
+    }
+    .club-row {
+        margin-bottom: 150px;
+        align-items: center;
+        display: flex;
+    }
+    .club-row:last-child { margin-bottom: 0; }
+    
+    /* GÖRSEL ALANI */
+    .club-img-box {
+        position: relative;
+        border-radius: 50px;
+        overflow: hidden;
+        box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+        border: 2px solid rgba(255,255,255,0.05);
+    }
+    .club-img-box img {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+        transition: transform 1.5s ease;
+    }
+    .club-img-box :hover { transform: scale(1.1); }
+
+    /* RENK GRUPLARI */
+    .color-sanat { --club-clr: #ff3e6d; }      /* Canlı Pembe/Kırmızı */
+    .color-sosyal { --club-clr: #22d3ee; }     /* Turkuaz */
+    .color-kitap { --club-clr: #fbbf24; }      /* Altın Sarısı */
+    .color-gelisim { --club-clr: #a855f7; }    /* Parlak Mor */
+    .color-bilisim { --club-clr: #4ade80; }    /* Neon Yeşil */
+
+    .club-tag {
+        color: var(--club-clr);
+        font-weight: 800;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        display: block;
+    }
+    .club-title {
+        font-family: 'Outfit', sans-serif;
+        font-weight: 800;
+        font-size: 4rem;
+        line-height: 0.9;
+        margin-bottom: 30px;
+        letter-spacing: -3px;
+        color: white;
+    }
+    .club-desc {
+        color: rgba(255,255,255,0.8);
+        font-size: 1.25rem;
+        line-height: 1.8;
+        margin-bottom: 40px;
+    }
+    .btn-club {
+        background: var(--club-clr);
+        color: #000;
+        padding: 15px 35px;
+        border-radius: 100px;
+        font-weight: 800;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+    .btn-club::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+        transition: left 0.5s ease;
+        z-index: -1;
+    }
+    .btn-club:hover::before {
+        left: 100%;
+    }
+    .btn-club:hover {
+        transform: translateY(-6px) scale(1.04);
+        box-shadow: 0 15px 35px var(--club-clr), 0 0 25px var(--club-clr);
+        color: #000;
+        filter: brightness(1.12);
+    }
+    .btn-club:active {
+        transform: translateY(-2px) scale(0.97);
+        box-shadow: 0 5px 15px var(--club-clr);
+    }
+
+    @media (max-width: 992px) {
+        .club-title { font-size: 3rem; }
+        .club-row { text-align: center; flex-direction: column !important; }
+        .club-img-box { margin-bottom: 50px; }
+    }
+
+        /* Gelişmiş Navigasyon */
+        .navbar {
+            background: transparent !important;
+            backdrop-filter: none;
+            border-bottom: 1px solid transparent;
+            padding: 15px 0;
+            transition: all 0.4s ease;
+            z-index: 1000;
+        }
+
+        /* Sayfa en üstteyken linkleri, butonları ve logo metnini gizle */
+        .navbar #navbarNav,
+        .navbar .brand-text-content {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            transform: translateY(-10px);
+        }
+
+        /* Kaydırılınca aktif olacak class */
+        .navbar.navbar-scrolled {
+            background: rgba(23, 25, 52, 1) !important;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(182, 200, 255, 0.15);
+        }
+
+        .navbar.navbar-scrolled #navbarNav,
+        .navbar.navbar-scrolled .brand-text-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Hero Section - Video Arka Plan */
+        .hero-advanced {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--color3);
+            color: var(--color2);
+            position: relative;
+            overflow: hidden;
+            margin-top: 0;
+        }
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: fill; /* Videoyu yanlardan genişleterek boşlukları doldurması için fill kullanıldı */
+            z-index: 0;
+            background: var(--color3);
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        .hero-advanced .container {
+            position: relative;
+            z-index: 2;
+        }
+        .footer-premium {
+        background: #161d33; /* Daha açık ve canlı bir mavi tonu */
+        color: #ffffff;
+        padding-top: 80px;
+        margin-bottom: 0;
+        padding-bottom: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        position: relative;
+        overflow: hidden;
+    }
+    .footer-premium::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--neon-cyan, #00f2ff), transparent);
+    }
+    .footer-logo {
+        font-family: 'Outfit', sans-serif;
+        font-weight: 800;
+        font-size: 1.8rem;
+        letter-spacing: -1px;
+    }
+    .footer-link {
+        color: #a0a0c0;
+        text-decoration: none;
+        transition: 0.3s;
+        display: block;
+        margin-bottom: 12px;
+        font-size: 0.9rem;
+    }
+    .footer-link:hover {
+        color: var(--neon-cyan, #00f2ff);
+        padding-left: 8px;
+    }
+    .footer-title {
+        font-family: 'Outfit', sans-serif;
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 25px;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .social-circle {
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        margin-right: 10px;
+        transition: 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .social-circle:hover {
+        background: var(--neon-cyan, #00f2ff);
+        color: #171934;
+        transform: translateY(-5px);
+    }
+    .newsletter-input {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 12px 15px;
+        color: white;
+        font-size: 0.9rem;
+    }
+    .newsletter-input:focus {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: var(--neon-cyan, #00f2ff);
+        box-shadow: none;
+        color: white;
+    }
+
+        /* Cam Efektli Kartlar */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 30px;
+            transition: 0.4s ease;
+        }
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--color1);
+            transform: translateY(-10px);
+        }
+
+        /* Eğitim Kartları Pro */
+        .course-box {
+            border-radius: 30px;
+            background: #fff;
+            border: 1px solid var(--color5);
+            padding: 10px;
+            transition: 0.5s;
+        }
+        .course-box:hover {
+            box-shadow: 0 40px 80px rgba(23, 25, 52, 0.08);
+            border-color: var(--color1);
+        }
+        .course-img {
+            border-radius: 25px;
+            height: 220px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        /* Premium Buton */
+        .btn-premium {
+            background: linear-gradient(45deg, var(--color1), var(--neon-cyan));
+            color: var(--color3) !important;
+            font-weight: 800;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .btn-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.55s ease;
+            z-index: -1;
+        }
+        .btn-premium:hover::before {
+            left: 100%;
+        }
+        .btn-premium:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 20px 45px rgba(0, 242, 255, 0.35), 0 0 30px rgba(182, 200, 255, 0.25);
+            filter: brightness(1.1);
+        }
+        /* Tıklandığında küçük bir geri bildirim efekti */
+        .btn-premium:active {
+            transform: translateY(-2px) scale(0.97);
+            box-shadow: 0 5px 15px rgba(0, 242, 255, 0.2);
+        }
+
+        /* Süreç Akışı (Timeline) */
+        .process-step {
+            position: relative;
+            padding: 20px;
+            text-align: center;
+        }
+        .step-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: rgba(182, 200, 255, 0.1);
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* İletişim Alanı */
+        .contact-section {
+            background: var(--color3);
+            border-radius: 60px;
+            padding: 80px;
+            margin-top: -100px;
+            position: relative;
+            z-index: 10;
+        }
+        /* Bu bölüme özel ek estetik */
+    .class-section {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .huge-number {
+        font-size: 25vw;
+        font-weight: 900;
+        position: absolute;
+        line-height: 1;
+        z-index: 0;
+        opacity: 0.03;
+        user-select: none;
+    }
+    .feature-icon-circle {
+        width: 60px;
+        height: 60px;
+        background: var(--color1);
+        color: var(--color3);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 20px rgba(182, 200, 255, 0.3);
+    }
+    .image-wrapper img {
+        border-radius: 40px;
+        box-shadow: 0 50px 100px rgba(23, 25, 52, 0.15);
+        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .image-wrapper:hover img {
+        transform: scale(1.02) translateY(-10px);
+    }
+    .shadow-hover:hover {
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.07) !important;
+        border-color: #00f2ff !important;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    }
+    .transition-all {
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .py-10 { padding: 100px 0; }
+    /* Ana Buton Stili */
+.club-nav-link {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    padding: 15px 20px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.08);
+    font-weight: 700;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px;
+}
+
+/* Hover Hareketleri */
+.club-nav-link:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: transparent;
+    color: #fff !important;
+}
+
+/* --- KULÜP ÖZEL RENKLERİ --- */
+
+/* Sanat - Mor Efekti */
+.nav-gelisim:hover {
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
+}
+
+/* bilişim - Canlı Teal (Görselindeki o renk) */
+.nav-bilisim:hover {
+    background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+    box-shadow: 0 10px 30px rgba(20, 184, 166, 0.3);
+}
+
+/* Kitap - Soft Mavi/Yeşil */
+.nav-kitap:hover {
+    background: linear-gradient(135deg, #ffb800 0%, #ff8a00 100%);
+    box-shadow: 3px 10px 30px rgba(255, 184, 0, 0.4);
+}
+
+/* Sanat - Turuncu/Kırmızı Işıma */
+.nav-sanat:hover {
+   background: linear-gradient(45deg, #ff426f 0%, #ff5e84 100%);
+   box-shadow: 0 10px 30px rgba(255, 66, 111, 0.5);
+}
+/* Sosyal - Senin Meşhur Neon Cyan/Mavi Geçişin */
+.nav-sosyal:hover {
+    background: linear-gradient(135deg, #00f2ff 0%, #0072ff 100%);
+    box-shadow: 0 10px 35px rgba(0, 242, 255, 0.4);
+}
+.brand-text-content {
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Kelimeler arası ideal boşluk */
+        font-family: 'Plus Jakarta Sans', sans-serif; /* Fontu eşitledik */
+    }
+
+    .brand-base {
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 1.7rem;
+        letter-spacing: -0.5px;
+    }
+
+    .brand-tech-only {
+        /* Arkaplan yok, sadece saf renk vurgusu */
+        color: #00f2ff;
+        font-weight: 900; /* Biraz daha kalın yaparak vurguladık */
+        font-size: 1.7rem;
+        letter-spacing: -0.5px;
+        
+        /* Hafif bir derinlik için çok ince gölge (isteğe bağlı) */
+        text-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+        transition: 0.3s ease;
+    }
+
+    /* RESPONSIVE OPTIMIZATIONS */
+    @media (max-width: 768px) {
+        .display-2 { font-size: 2.5rem !important; }
+        .display-3 { font-size: 2.2rem !important; }
+        .display-4 { font-size: 2rem !important; }
+        .club-title { font-size: 2.5rem !important; }
+        .huge-number { font-size: 40vw !important; opacity: 0.02 !important; }
+        
+        .class-section { padding: 40px 0 !important; }
+        .py-10 { padding: 50px 0 !important; }
+        
+        .club-nav-link { 
+            min-width: 140px; 
+            padding: 10px; 
+            font-size: 0.8rem;
+            border-radius: 12px;
+        }
+        
+        .contact-section { padding: 40px 20px !important; margin-top: -50px !important; }
+        .hero-advanced { text-align: center; }
+        
+        .brand-base, .brand-tech-only { font-size: 1.2rem !important; }
+        
+        .row.club-row { margin-bottom: 60px !important; }
+        .feature-icon-circle { width: 50px; height: 50px; font-size: 1.2rem; }
+        
+        .club-nav-link { 
+            width: calc(50% - 10px); 
+            min-width: unset;
+            margin-bottom: 10px;
+        }
+    }
+    
+    html, body { overflow-x: hidden; width: 100%; position: relative; margin: 0; padding: 0; }
+    html { background-color: #161d33; }
+    
+
+    /* Üzerine gelince renk canlansın */
+    .navbar-brand:hover .brand-tech-only {
+        color: #39e8ff;
+        text-shadow: 0 0 15px rgba(55, 241, 251, 0.763);
+    }
+
+    /* WhatsApp Navbar Butonu */
+    .btn-whatsapp-nav {
+        background: linear-gradient(135deg, #25D366, #128C7E);
+        color: #fff !important;
+        font-weight: 700;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 100px;
+        font-size: 0.88rem;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        position: relative;
+        overflow: hidden;
+        text-decoration: none;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
+    }
+    .btn-whatsapp-nav::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+        transition: left 0.5s ease;
+    }
+    .btn-whatsapp-nav:hover::before {
+        left: 100%;
+    }
+    .btn-whatsapp-nav:hover {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4), 0 0 15px rgba(37, 211, 102, 0.2);
+        color: #fff !important;
+    }
+    .btn-whatsapp-nav:active {
+        transform: translateY(-1px) scale(0.98);
+    }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid px-4 px-xl-5">
+            <a class="navbar-brand d-flex align-items-center fw-800 fs-3" href="#">
+                <img src="assets/images/logo.png" style="width:70px; margin-right:15px;">
+                <div class="brand-text-content">
+                    <span class="brand-base"><span style="color: #00f2ff;">Ferhatlar</span> Enderun</span>
+                    <span class="brand-tech-only">Bilişim</span>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-4">
+                    <li class="nav-item"><a class="nav-link" style="color: #f8ecff;" href="index.html">Anasayfa</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: #f8ecff;" href="#kurslar">Eğitim Müfredatı</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: #f8ecff;" href="kulupfaliyetleri.html">Kulüp Faaliyetleri</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: #f8ecff;" href="talebeprojeleri.html">Projelerimiz</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: #f8ecff;" href="iletisim.html">İletişim</a></li>
+                    <li class="nav-item"><a class="btn-whatsapp-nav" href="https://wa.me/905312453913?text=Merhaba%2C%20Ferhatlar%20Enderun%20Bili%C5%9Fim%20Yurdu%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank"><i class="bi bi-whatsapp" style="font-size: 1.1rem;"></i>İletişime Geç</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <header class="hero-advanced text-center text-lg-start">
+        <!-- Video Arka Plan -->
+        <video class="hero-video" autoplay loop muted playsinline>
+            <source src="assets/video/tanitim.mp4" type="video/mp4">
+        </video>
+        <!-- Karartma Overlay -->
+        <div class="hero-overlay"></div>
+
+    </header>
+
+    
+    <section id="kurslar" class="bg-white">
+    <div class="container pt-4 pb-0 mt-2">
+        <div class="row">
+            <div class="col-lg-8">
+                <h5 class="text-primary fw-bold tracking-widest text-uppercase">Geleceği Tasarla</h5>
+                <h2 class="display-2 fw-800 mb-1" style="letter-spacing: -2px;">Enderun Bilişim<br><span class="text-info">Müfredatı</span></h2>
+            </div>
+        </div>
+    </div>
+    </section>
+    <section id="9sinif">
+    <div class="class-section py-1">
+        <span class="huge-number" style="right: -1%;">09</span>
+        <div class="container">
+            <div class="row align-items-lg-start align-items-center g-5">
+                <div class="col-lg-6">
+                    <div class="image-wrapper mt-5 pt-3">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80" class="img-fluid" alt="9. Sınıf" style="transform: scale(1.08);">
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1">
+                    <div class="feature-icon-circle"><i class="bi bi-layers"></i></div>
+                    <h3 class="display-6 fw-800 mb-4" style="font-size: 2.5rem; line-height: 1.15;">Donanım, Algoritma <br>ve 3D Modelleme:<br><span class="text-info">Python ile Yazılımın Temelleri</span></h3>
+                    <p class="lead text-secondary mb-4" style="font-size: 1.15rem; line-height: 1.75;">Bilgisayar donanımını ve çalışma mantığını öğrenerek sağlam bir temel atın, Python ile algoritma ve kodlama becerilerinizi geliştirin ve son olarak Fusion 360 kullanarak fikirlerinizi 3 boyutlu modellere dönüştürün.</p>
+                    <div class="row row-cols-2 g-3 mb-5">
+                        <div class="col"><div class="px-3 py-2 h-100"><h6 class="fw-bold mb-0" style="font-size: 1rem;">Donanım Mimarisi</h6><p class="small text-muted mb-0" style="font-size: 0.9rem;">Bilişimin fiziksel temelleri.</p></div></div>
+                        <div class="col"><div class="px-3 py-2 h-100 border-start"><h6 class="fw-bold mb-0" style="font-size: 1rem;">Algoritma</h6><p class="small text-muted mb-0" style="font-size: 0.9rem;">Sıfırdan algoritma mimarisi.</p></div></div>
+                        <div class="col"><div class="px-3 py-2 h-100"><h6 class="fw-bold mb-0" style="font-size: 1rem;">Python</h6><p class="small text-muted mb-0" style="font-size: 0.9rem;">Profesyonel kodlama dünyası.</p></div></div>
+                        <div class="col"><div class="px-3 py-2 h-100 border-start"><h6 class="fw-bold mb-0" style="font-size: 1rem;">Fusion 360</h6><p class="small text-muted mb-0" style="font-size: 0.9rem;">Parametrik 3B tasarım.</p></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <section id="10sinif">
+    <div class="class-section py-5 bg-dark text-white">
+        <span class="huge-number text-white" style="left: -2%; opacity: 0.05;">10</span>
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5 order-2 order-lg-1">
+                    <div class="feature-icon-circle" style="background: var(--neon-cyan);"><i class="bi bi-cpu"></i></div>
+                    <h3 class="display-4 fw-800 mb-4">Mühendislik ve <br>İnovasyon</h3>
+                    <p class="lead opacity-75 mb-4">İkinci yılda endüstri standartlarına geçiş yapıyoruz. C# ile kurumsal kod yazarken Fusion 360 ile gerçek dünya mühendislik çözümleri üretiyoruz.</p>
+                    <ul class="list-unstyled mb-5">
+                        <li class="mb-3 d-flex align-items-center"><i class="bi bi-check-circle-fill text-info me-3"></i> .NET Core ile Arka Plan Mimarisi</li>
+                        <li class="mb-3 d-flex align-items-center"><i class="bi bi-check-circle-fill text-info me-3"></i> Fusion 360 CAD/CAM Uzmanlığı</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 offset-lg-1 order-1 order-lg-2">
+                    <div class="image-wrapper">
+                        <img src="https://diamuhendislik.com.tr/wp-content/uploads/2023/11/steptodown.com434000.jpg" class="img-fluid" alt="10. Sınıf">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <section id="11sinif">
+        <br><br><br><br>
+    <div class="class-section py-5">
+        <span class="huge-number" style="right: -2%;">11</span>
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <div class="image-wrapper"> 
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1000&q=80" class="img-fluid" alt="11. Sınıf" style="width: 100%; height: auto; max-height: 580px; object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1">
+                    <div class="feature-icon-circle" style="background: #000; color: #fff;"><i class="bi bi-palette"></i></div>
+                    <h3 class="display-4 fw-800 mb-4">Web, Mobil ve <br>Grafik Tasarım</h3>
+                    <p class="lead text-secondary mb-4">Mezuniyet öncesi son aşamada, Adobe araçlarıyla estetik vizyonunuzu geliştirirken Full Stack metodolojisiyle sistemlerin mutfağına hakim olursunuz. Müfredattaki mobil dersler aracılığıyla teknik portföyünüzü taşınabilir platformlara yayarak, dijital dönüşüme yön veren çok yönlü bir uzman kimliği kazanırsınız.</p>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="bg-light p-3 rounded-4 h-100 shadow-sm border border-light-subtle">
+                                <h6 class="fw-bold mb-0">Grafik Tasarım</h6>
+                                <span class="small opacity-75">Video ve Fotoğraf Düzenleme</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="bg-light p-3 rounded-4 h-100 shadow-sm border border-light-subtle">
+                                <h6 class="fw-bold mb-0">Web Geliştirme</h6>
+                                <span class="small opacity-75">Frontend & Backend</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="bg-light p-3 rounded-4 h-100 shadow-sm border border-light-subtle">
+                                <h6 class="fw-bold mb-0">Mobil Uygulama</h6>
+                                <span class="small opacity-75">Dart & Flutter</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <footer class="footer-premium">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <a class="navbar-brand d-flex align-items-center fw-800 fs-3 mb-2" href="index.html">
+                        <img src="assets/images/logo.png" style="width:70px; margin-right:15px;" alt="Logo">
+                        <div class="brand-text-content">
+                            <span class="brand-base"><span style="color: #00f2ff;">Ferhatlar</span> Enderun</span>
+                            <span class="brand-tech-only">Bilişim</span>
+                        </div>
+                    </a>
+                    <p class="small text-white mb-4" style="line-height: 1.8;">
+                        Ferhatlar Enderun Bilişim, geleceğin mühendislerini ve tasarımcılarını lise yıllarında
+                        sektörel standartlarla hazırlar. İnovasyon odaklı eğitim modelimizle yarını bugün inşa ediyoruz.
+                    </p>
+                </div>
+
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-title">Müfredat</h5>
+                    <a href="#9sinif" class="footer-link">9. Sınıf</a>
+                    <a href="#10sinif" class="footer-link">10. Sınıf</a>
+                    <a href="#11sinif" class="footer-link">11. Sınıf</a>
+                </div>
+
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-title">Kurumsal</h5>
+                    <a href="#surec" class="footer-link">Eğitim Modelimiz</a>
+                    <a href="kulupfaliyetleri.html" class="footer-link">Kulüp Faaliyetleri</a>
+                    <a href="talebeprojeleri.html" class="footer-link">Projelerimiz</a>
+                    <a href="iletisim.html" class="footer-link">İletişim</a>
+                </div>
+
+                <div class="col-lg-4">
+                    <h5 class="footer-title">Gelişmelerden Haberdar Ol</h5>
+                    <p class="small text-white mb-4">Yeni açılan branşlar ve teknoloji seminerlerimiz hakkında bilgi
+                        almak için iletişime geçin.</p>
+                    <div class="small text-muted mt-4">
+                        <div class="mb-2"><i class="bi bi-geo-alt text-info me-2"></i><span class="text-white">İstanbul,
+                                Türkiye</span></div>
+                        <div><i class="bi bi-envelope text-info me-2"></i><span class="text-white">
+                                info@enderunbilisim.com</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="mt-4 pt-4 border-top border-secondary opacity-50 d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <p class="small mb-0">&copy; 2026 Ferhatlar Enderun Bilişim. Tüm Hakları Saklıdır.</p>
+                <div class="d-flex gap-4 mt-3 mt-md-0">
+                    <span class="text-white small">designed by Ertuğrul Demirci</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+        const navbar = document.querySelector('.navbar');
+        
+        function handleNavbarScroll() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        }
+        
+        window.addEventListener('scroll', handleNavbarScroll);
+        window.addEventListener('load', handleNavbarScroll);
+        
+        // İlk renderda hemen kontrol et
+        handleNavbarScroll();
+
+        // Mobil menüde linke tıklayınca menünün kapanmasını sağlar
+        document.querySelectorAll('.nav-link, .btn-whatsapp-nav').forEach(link => {
+            link.addEventListener('click', () => {
+                const navbarCollapse = document.getElementById('navbarNav');
+                if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                    bootstrap.Collapse.getInstance(navbarCollapse).hide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

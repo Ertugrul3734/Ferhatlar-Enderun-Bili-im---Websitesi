@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talebe Projeleri | Ferhatlar Enderun Bilişim</title>
+    <link rel="website icon" href="assets/images/logo.png" type="png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* SENİN PALETİN (AĞIRLIKLI) */
+            --color1: #b6c8ff; 
+            --color2: #f8ecff; 
+            --color3: #171934; 
+            --color4: #77767c; 
+            --color5: #e2e2e2;
+            --accent-gold: #ffd700;
+            --neon-cyan: #00f2ff;
+            --glass: rgba(255, 255, 255, 0.05);
+
+            --bg: #ffffff;
+            --surface: #ffffff;
+            --text: #171934;
+            --text-muted: #77767c;
+            --accent: #00f2ff;
+            --border: #e2e2e2;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05);
+            --shadow-hover: 0 20px 40px -10px rgba(0, 242, 255, 0.15);
+        }
+
+        html, body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6, .navbar-brand { font-family: 'Outfit', sans-serif; }
+
+        /* ═══ NAVBAR — index.html ile birebir aynı ═══ */
+        .navbar {
+            background: rgba(23, 25, 52, 1) !important;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(182, 200, 255, 0.15);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .brand-text-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .brand-base {
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 1.7rem;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-tech-only {
+            color: #00f2ff;
+            font-weight: 900;
+            font-size: 1.7rem;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+            transition: 0.3s ease;
+        }
+
+        .navbar-brand:hover .brand-tech-only {
+            color: #39e8ff;
+            text-shadow: 0 0 15px rgba(55, 241, 251, 0.763);
+        }
+
+        .btn-whatsapp-nav {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #fff !important;
+            font-weight: 700;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-size: 0.88rem;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
+        }
+        .btn-whatsapp-nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-whatsapp-nav:hover::before {
+            left: 100%;
+        }
+        .btn-whatsapp-nav:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4), 0 0 15px rgba(37, 211, 102, 0.2);
+            color: #fff !important;
+        }
+        .btn-whatsapp-nav:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        @media (max-width: 768px) {
+            .brand-base, .brand-tech-only { font-size: 1.2rem !important; }
+        }
+
+        /* ═══ HERO — Koyu Tema ═══ */
+        .projects-hero {
+            padding: 100px 0 60px;
+            text-align: center;
+            position: relative;
+            background: var(--color3);
+            color: white;
+        }
+        .projects-hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 50% 40%, rgba(0,242,255,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero-tag {
+            display: inline-block;
+            background: rgba(0,242,255,0.08);
+            border: 1px solid rgba(0,242,255,0.18);
+            color: var(--neon-cyan);
+            padding: 8px 22px; border-radius: 100px;
+            font-size: 0.82rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+        .hero-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            font-size: 4rem;
+            color: white;
+            letter-spacing: -3px;
+            margin-bottom: 24px;
+            line-height: 0.9;
+        }
+        .hero-title span { color: var(--neon-cyan); }
+        .hero-desc { color: rgba(255,255,255,0.8); font-size: 1.25rem; max-width: 750px; margin: 0 auto; line-height: 1.6; }
+
+        /* ═══ PROJE SATIRLARI — Video Yanında Açıklama ═══ */
+        .projects-section { padding: 60px 0 120px; background: var(--bg); }
+        .project-row {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all .45s cubic-bezier(.2,.8,.2,1);
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+        }
+        .project-row:hover {
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color1);
+            transform: translateY(-3px);
+        }
+        .project-row:nth-child(even) { flex-direction: row-reverse; }
+        .project-video {
+            position: relative;
+            flex: 0 0 55%;
+            min-height: 320px;
+            background: linear-gradient(145deg, var(--color2) 0%, var(--color5) 100%);
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .project-video::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(182,200,255,0.06) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 70%, rgba(0,242,255,0.06) 0%, transparent 50%);
+        }
+        .play-btn {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            border: 2px solid rgba(0,242,255,0.2);
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            transition: all .35s ease;
+            position: relative; z-index: 2;
+            box-shadow: 0 8px 30px rgba(0,242,255,0.15);
+        }
+        .play-btn i { font-size: 1.6rem; color: var(--color3); margin-left: 3px; transition: transform .3s; }
+        .project-row:hover .play-btn { transform: scale(1.1); border-color: var(--neon-cyan); background: var(--neon-cyan); }
+        .project-row:hover .play-btn i { transform: scale(1.1); color: var(--color3); }
+        .project-info {
+            flex: 1 1 auto;
+            padding: 48px 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .project-tag {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(0,242,255,0.07);
+            border: 1px solid rgba(0,242,255,0.15);
+            color: var(--text);
+            font-size: .72rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+            padding: 5px 12px; border-radius: 100px; margin-bottom: 16px; align-self: flex-start;
+        }
+        .project-title { font-family: 'Outfit',sans-serif; font-weight: 800; font-size: 1.7rem; color: var(--text); margin-bottom: 12px; line-height: 1.25; letter-spacing: -.3px; }
+        .project-desc { color: var(--text-muted); font-size: 1rem; line-height: 1.75; margin-bottom: 28px; }
+        .project-link {
+            color: #fff; font-weight: 500; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: .92rem; transition: all .3s; align-self: flex-start;
+            padding: 10px 22px; border-radius: 10px;
+            background: var(--color3); border: 1px solid var(--color3);
+        }
+        .project-link i { transition: transform .3s; font-size: .85rem; }
+        .project-link:hover { background: var(--neon-cyan); border-color: var(--neon-cyan); color: var(--color3); transform: translateX(4px); }
+        .project-link:hover i { transform: translateX(4px); }
+
+        @media (max-width: 992px) {
+            .project-row, .project-row:nth-child(even) { flex-direction: column; }
+            .project-video { flex: 1 1 auto; min-height: 240px; }
+            .project-info { padding: 32px 28px; }
+            .hero-title { font-size: 2.6rem; }
+        }
+
+        /* ═══ FOOTER — index.html ile uyumlu ═══ */
+        .footer-premium {
+            background: #161d33;
+            color: #ffffff;
+            padding-top: 80px;
+            padding-bottom: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-link {
+            color: #a0a0c0;
+            text-decoration: none;
+            transition: 0.3s;
+            display: block;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+        }
+
+        .footer-link:hover {
+            color: #00f2ff;
+            padding-left: 8px;
+        }
+
+        .footer-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ NAVBAR ═══ -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid px-4 px-xl-5">
+            <a class="navbar-brand d-flex align-items-center fw-800 fs-3" href="index.html">
+                <img src="assets/images/logo.png" style="width:70px; margin-right:15px;" alt="Logo">
+                <div class="brand-text-content">
+                    <span class="brand-base"><span style="color: #00f2ff;">Ferhatlar</span> Enderun</span>
+                    <span class="brand-tech-only">Bilişim</span>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-4">
+                    <li class="nav-item"><a class="nav-link" style="color: #f8ecff;" href="index.html#anasayfa">Anasayfa</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: #f8ecff;" href="index.html#kurslar">Eğitim Müfredatı</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: #f8ecff;" href="kulupfaliyetleri.html">Kulüp Faaliyetleri</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: #f8ecff;" href="talebeprojeleri.html">Projelerimiz</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color: #f8ecff;" href="iletisim.html">İletişim</a></li>
+                    <li class="nav-item"><a class="btn-whatsapp-nav"
+                            href="https://wa.me/905312453913?text=Merhaba%2C%20Ferhatlar%20Enderun%20Bili%C5%9Fim%20Yurdu%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum."
+                            target="_blank"><i class="bi bi-whatsapp" style="font-size: 1.1rem;"></i>İletişime Geç</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="projects-hero" style="margin-top: 80px;">
+        <div class="container">
+            <h1 class="hero-title">Talebe <span>Projeleri</span></h1>
+            <p class="hero-desc">Öğrencilerimizin kod, tasarım ve mühendislik tutkusuyla hayata geçirdikleri çalışmaları keşfedin.</p>
+        </div>
+    </section>
+
+    <!-- ═══ PROJECTS — Video Yanında Açıklama ═══ -->
+    <section class="projects-section">
+        <div class="container">
+
+            <!-- Proje 1 -->
+            <article class="project-row">
+                <div class="project-video">
+                    <div class="play-btn"><i class="bi bi-play-fill"></i></div>
+                    <!-- <video src="assets/video/proje1.mp4" muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></video> -->
+                </div>
+                <div class="project-info">
+                    <span class="project-tag"><i class="bi bi-code-slash"></i> Web Sitesi</span>
+                    <h3 class="project-title">Pigment Colors</h3>
+                    <p class="project-desc">Pigmentcolors.com, arayüz tasarımları ve dijital projeler için zengin renk paletleri ile akıllı ton eşleştirme araçları sunan bir platformdur. Kullanıcılar bu site üzerinden projelerine en uygun renk kombinasyonlarını keşfedebilir ve uyumluluk testleri yapabilirler.</p>
+                    <a href="https://www.pigmentcolors.com/" target="_blank" class="project-link">Sayfayı Ziyaret Et <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <!-- Proje 2 -->
+            <article class="project-row">
+                <div class="project-video">
+                    <div class="play-btn"><i class="bi bi-play-fill"></i></div>
+                </div>
+                <div class="project-info">
+                    <span class="project-tag"><i class="bi bi-phone"></i> Mobil Uygulama</span>
+                    <h3 class="project-title">Kampüs Rehberi</h3>
+                    <p class="project-desc">Flutter ile yazılmış bu uygulama, yeni öğrencilerin kampüs içinde salon ve kütüphaneleri kolayca bulmasını sağlayan etkileşimli harita sunuyor.</p>
+                    <a href="#" class="project-link">Sayfayı Ziyaret Et <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <!-- Proje 3 -->
+            <article class="project-row">
+                <div class="project-video">
+                    <div class="play-btn"><i class="bi bi-play-fill"></i></div>
+                </div>
+                <div class="project-info">
+                    <span class="project-tag"><i class="bi bi-cpu"></i> IoT / Gömülü</span>
+                    <h3 class="project-title">Sera Otomasyon Sistemi</h3>
+                    <p class="project-desc">Arduino ve sensörlerle donatılan bu sistem, sıcaklık ve nemi gerçek zamanlı izleyerek sulama ve havalandırmayı otomatik yönetiyor.</p>
+                    <a href="#" class="project-link">Sayfayı Ziyaret Et <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <!-- Proje 4 -->
+            <article class="project-row">
+                <div class="project-video">
+                    <div class="play-btn"><i class="bi bi-play-fill"></i></div>
+                </div>
+                <div class="project-info">
+                    <span class="project-tag"><i class="bi bi-robot"></i> Yapay Zeka</span>
+                    <h3 class="project-title">Görüntü Sınıflandırıcı</h3>
+                    <p class="project-desc">Python ve TensorFlow ile eğitilen derin öğrenme modeli, el yazısı rakamları ve günlük nesneleri yüksek doğrulukla tanımlayabiliyor.</p>
+                    <a href="#" class="project-link">Sayfayı Ziyaret Et <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <!-- Proje 5 -->
+            <article class="project-row">
+                <div class="project-video">
+                    <div class="play-btn"><i class="bi bi-play-fill"></i></div>
+                </div>
+                <div class="project-info">
+                    <span class="project-tag"><i class="bi bi-palette"></i> Oyun / Tasarım</span>
+                    <h3 class="project-title">2D Platform Macerası</h3>
+                    <p class="project-desc">Unity motorunda C# ile kodlanan bu oyun, özgün karakter tasarımları ve seviye editörü ile retro tarzda eğlenceli bir platform deneyimi sunuyor.</p>
+                    <a href="#" class="project-link">Sayfayı Ziyaret Et <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <!-- Proje 6 -->
+            <article class="project-row">
+                <div class="project-video">
+                    <div class="play-btn"><i class="bi bi-play-fill"></i></div>
+                </div>
+                <div class="project-info">
+                    <span class="project-tag"><i class="bi bi-shield-lock"></i> Siber Güvenlik</span>
+                    <h3 class="project-title">Ağ Tarama Aracı</h3>
+                    <p class="project-desc">Python tabanlı bu güvenlik aracı, yerel ağdaki cihazları tarayıp zafiyet raporları oluşturarak temel ağ analizi becerilerini geliştiriyor.</p>
+                    <a href="#" class="project-link">Sayfayı Ziyaret Et <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer-premium">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <a class="navbar-brand d-flex align-items-center fw-800 fs-3 mb-2" href="index.html">
+                        <img src="assets/images/logo.png" style="width:70px; margin-right:15px;" alt="Logo">
+                        <div class="brand-text-content">
+                            <span class="brand-base"><span style="color: #00f2ff;">Ferhatlar</span> Enderun</span>
+                            <span class="brand-tech-only">Bilişim</span>
+                        </div>
+                    </a>
+                    <p class="small text-white mb-4" style="line-height: 1.8;">
+                        Ferhatlar Enderun Bilişim Akademisi, geleceğin mühendislerini ve tasarımcılarını lise yıllarında
+                        sektörel standartlarla hazırlar. İnovasyon odaklı eğitim modelimizle yarını bugün inşa ediyoruz.
+                    </p>
+                </div>
+
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-title">Müfredat</h5>
+                    <a href="index.html#9sinif" class="footer-link">9. Sınıf</a>
+                    <a href="index.html#10sinif" class="footer-link">10. Sınıf</a>
+                    <a href="index.html#11sinif" class="footer-link">11. Sınıf</a>
+                </div>
+
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-title">Kurumsal</h5>
+                    <a href="index.html#surec" class="footer-link">Eğitim Modelimiz</a>
+                    <a href="kulupfaliyetleri.html" class="footer-link">Kulüp Faaliyetleri</a>
+                    <a href="talebeprojeleri.html" class="footer-link">Projelerimiz</a>
+                    <a href="iletisim.html" class="footer-link">İletişim</a>
+                </div>
+
+                <div class="col-lg-4">
+                    <h5 class="footer-title">Gelişmelerden Haberdar Ol</h5>
+                    <p class="small text-white mb-4">Yeni açılan branşlar ve teknoloji seminerlerimiz hakkında bilgi
+                        almak için iletişime geçin.</p>
+                    <div class="small text-muted mt-4">
+                        <div class="mb-2"><i class="bi bi-geo-alt text-info me-2"></i><span class="text-white">İstanbul,
+                                Türkiye</span></div>
+                        <div><i class="bi bi-envelope text-info me-2"></i><span class="text-white">
+                                info@enderunbilisim.com</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-top border-secondary opacity-50 d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <p class="small mb-0">© 2026 Ferhatlar Enderun Bilişim Akademisi. Tüm Hakları Saklıdır.</p>
+                <div class="d-flex gap-4 mt-3 mt-md-0">
+                    <span class="text-white small">designed by Ertuğrul Demirci</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Mobil menüde linke tıklayınca menünün kapanmasını sağlar
+        document.querySelectorAll('.nav-link, .btn-whatsapp-nav').forEach(link => {
+            link.addEventListener('click', () => {
+                const navbarCollapse = document.getElementById('navbarNav');
+                if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                    bootstrap.Collapse.getInstance(navbarCollapse).hide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
